@@ -77,6 +77,16 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Root endpoint
+@app.get("/")
+def root():
+    return {"message": "API is running successfully"}
+
+# Health check endpoint
+@app.get("/health")
+def health_check():
+    return {"status": "ok"}
+
 app.mount("/uploads", StaticFiles(directory=settings.upload_dir), name="uploads")
 
 def _coerce_datetimes(data: dict) -> dict:
